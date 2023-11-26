@@ -5,7 +5,9 @@ Figura3D: Una clase abstracta que representa una figura tridimensional y define 
 para calcular su volumen y área superficial.
 Cubo, Esfera y Cilindro: Subclases de Figura3D que implementan los métodos para calcular el volumen y 
 área superficial específicos de cada figura.Crea instancias de estas clases y demuestra cómo 
-calcular el volumen y área superficial de diferentes figuras tridimensionales."""
+calcular el volumen y área superficial de diferentes figuras tridimensionales.
+Importante: Se deberá escribir un detalle del ejercicio explicando de qué manera lo resolvieron, cómo aplicaron 
+los distintos conceptos de la POO."""
 
 from abc import ABC, abstractmethod
 import math

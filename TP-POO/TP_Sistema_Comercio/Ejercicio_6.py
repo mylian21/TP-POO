@@ -6,35 +6,52 @@ y calcular el total de los productos en el carrito.
 Cliente: Una clase que representa a un cliente con atributos como nombre, dirección, carrito de compra, etc.
 Crea instancias de estas clases y demuestra cómo un cliente puede agregar productos a su carrito, realizar 
 una compra y calcular el total.
+Importante: Se deberá escribir un detalle del ejercicio explicando de qué manera lo resolvieron, cómo aplicaron 
+los distintos conceptos de la POO.
 """
-#Creamos las distintas clases según el enunciado
-class Producto:
+from abc import ABC, abstractmethod
+#Creé esta clase abstracta para poder aplicar el pilar de la  POO, Abstracción.
+class Producto_Abstracto(ABC):
+    def __init__(self, nommbre, precio, cantidad_stock):
+        pass
+    @abstractmethod 
+    def Disminuir_Stock(self): #Esta es la Abstracción
+        pass
+    @abstractmethod
+    def Incrementar_Stock(self): #Esta es la Abstracción
+        pass
+
+#Creamos la clase producto
+class Producto(Producto_Abstracto):
     def __init__(self, nommbre, precio, cantidad_stock, categoria):
-        self._nombre=nommbre
-        self._precio=precio
+        super().__init__(nommbre, precio, cantidad_stock)
+        self._nombre=nommbre   #Atributo encapsulado
+        self._precio=precio    #Atributo encapsulado
         self.cantidad_stock=cantidad_stock
         self.categoria=categoria
 
-    @property
-    def nombre(self):
+    @property   #Decorador para poder acceder al atributo encapsulado
+    def nombre(self): 
         return self._nombre
 
-    @property
-    def precio(self):
+    @property   #Decorador para poder acceder al atributo encapsulado
+    def precio(self): 
         return self._precio
 
-    def Disminuir_Stock(self): 
+    def Disminuir_Stock(self): #Implementación de la abstracción
         if self.cantidad_stock > 0:
             self.cantidad_stock-= 1
   
-    def Incrementar_Stock(self):
+    def Incrementar_Stock(self): #Implementación de la abstracción
         self.cantidad_stock += 1
 
-class Carrito_Compra:
+
+#Creamos la clase Carrito tal como lo solicita la consigna, con los métodos mencionados
+class Carrito_Compra: 
     def __init__(self):
         self.productos = []
 
-    def agregar_producto(self, producto):
+    def agregar_producto(self, producto): 
         self.productos.append(producto)
 
     def eliminar_producto(self, producto):
@@ -47,6 +64,7 @@ class Carrito_Compra:
             total_productos += 1
         return f"El total de productos que tiene el carrito es: {total_productos}"
 
+#Creamos la clase 
 class Cliente:
     def init(self, nombre, direccion):
         self.nombre = nombre
@@ -64,6 +82,7 @@ pantalon =Producto("Jean Negro",20000 , 850, "Pantalones")
 carrito = Carrito_Compra()
 carrito.agregar_producto(remera)
 carrito.agregar_producto(pantalon)
+
 
 
     

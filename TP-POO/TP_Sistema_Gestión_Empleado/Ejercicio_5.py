@@ -6,7 +6,9 @@ del salario en base al cargo y permite consultar el salario.
 Gerente: Una subclase de Empleado que agrega atributos específicos de un gerente, como departamento.
 Departamento: Una clase que contiene una lista de empleados y métodos para agregar, eliminar y consultar empleados.
 Crea instancias de estas clases y demuestra cómo agregar empleados a un departamento, calcular salarios 
-y acceder a la información de las personas"""
+y acceder a la información de las personas
+Importante: Se deberá escribir un detalle del ejercicio explicando de qué manera lo resolvieron, cómo aplicaron 
+los distintos conceptos de la POO."""
 
 class Persona:
     def __init__(self, nombre, edad, dni):
@@ -21,7 +23,7 @@ class Persona:
     def dni(self):                 #Parte de Encapsulamiento
         return self._dni 
 
-    def acceder_info(self):        #Esta es laAbstracción
+    def acceder_info(self):        #Esta es la Abstracción
         pass
 
 
