@@ -7,7 +7,7 @@ Cliente: Una clase que representa a un cliente con atributos como nombre, direcc
 Crea instancias de estas clases y demuestra cómo un cliente puede agregar productos a su carrito, realizar 
 una compra y calcular el total.
 """
-
+#Creamos las distintas clases según el enunciado
 class Producto:
     def __init__(self, nommbre, precio, cantidad_stock, categoria):
         self._nombre=nommbre
