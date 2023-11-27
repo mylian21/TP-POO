@@ -10,34 +10,36 @@ y acceder a la información de las personas
 Importante: Se deberá escribir un detalle del ejercicio explicando de qué manera lo resolvieron, cómo aplicaron 
 los distintos conceptos de la POO."""
 
+#Creamos las distintas clases según el enunciado
 class Persona:
     def __init__(self, nombre, edad, dni):
         self._nombre=nombre        #Parte de Encapsulamiento
         self.edad=edad
         self._dni=dni              #Parte de Encapsulamiento
 
-    @property
-    def nombre(self):              #Parte de Encapsulamiento
+    @property                      #Decorador para poder acceder al atributo encapsulado
+    def nombre(self):              
         return self._nombre 
-    @property
-    def dni(self):                 #Parte de Encapsulamiento
+    @property                      #Decorador para poder acceder al atributo encapsulado
+    def dni(self):                 
         return self._dni 
 
     def acceder_info(self):        #Esta es la Abstracción
         pass
 
 
-class Empleado(Persona):             #Esto es Herencia
+#Creamos la clase "Empleado" que hereda de "Persona"
+class Empleado(Persona):                #Esto es Herencia
     def __init__(self, _nombre, edad, _dni, salario, cargo):
         super().__init__(_nombre, edad, _dni) 
-        self._salario=salario      #Parte de Encapsulamiento
+        self._salario=salario           #Atributo Encapsulado.
         self.cargo=cargo
     
     @property 
-    def salario(self):              #Parte de Encapsulamiento
+    def salario(self):                  #Parte de Encapsulamiento
         return self._salario 
     
-    def acceder_info(self):         #Implementación de la abstracción
+    def acceder_info(self):             #Implementación de la abstracción
         return f"Empleado: {self._nombre}, Edad:{self.edad}, DNI:{self._dni}, Salario:{self._salario}, Cargo:{self.cargo}"
     
     def calcular_salario(self):     #Esto es polimorfismo
@@ -77,13 +79,14 @@ class Empleado(Persona):             #Esto es Herencia
             return "No contamos con ese cargo en la empresa"  
         
 
-class Gerente (Empleado):                 #Esto es Herencia
+#Creamos la clase de "Gerente" que hereda de empleado:
+class Gerente (Empleado):        #Esto es Herencia
     def __init__(self, _nombre, edad, _dni, salario, cargo, departamento, plus_alimentación):
         super().__init__(_nombre, edad, _dni, salario, cargo)
         self.plus_alimentación=plus_alimentación
         self.departamento=departamento
 
-    def calcular_salario(self):           #Implementación del polimorfismo
+    def calcular_salario(self):  #Implementación del polimorfismo
         if self.cargo == "Gerente":
             sueldo=super().calcular_salario()+self.plus_alimentación
             return sueldo
@@ -101,20 +104,7 @@ class Departamento:
     def eliminar_empleado(self, empleado):
         self._empleados.remove(empleado)
 
-    def consultar_empleado(self, dni):
+    def consultar_empleado(self):
         for empleado in self._empleados:
-            if empleado.dni == dni:
-                return empleado
-        return "No tenemos un empleado con ese DNI."
+            return self._empleados  
 
-
-empleado=Gerente("PEPE", 38, 95878145, 100000, "Gerente", "IT", 20000)
-print(empleado.calcular_salario())
-print(empleado.consultar_salario())
-
-empleado1=Empleado("Mylian", 38, 95878147, 280000, "Asistente")
-print(empleado1.acceder_info())
-
-departamento=Departamento()
-departamento.agregar_empleado(empleado1)
-print(departamento.consultar_empleado(95878147))

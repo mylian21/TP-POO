@@ -9,11 +9,11 @@ una compra y calcular el total.
 Importante: Se deberá escribir un detalle del ejercicio explicando de qué manera lo resolvieron, cómo aplicaron 
 los distintos conceptos de la POO.
 """
+
 from abc import ABC, abstractmethod
 #Creé esta clase abstracta para poder aplicar el pilar de la  POO, Abstracción.
 class Producto_Abstracto(ABC):
-    def __init__(self, nommbre, precio, cantidad_stock):
-        pass
+    
     @abstractmethod 
     def Disminuir_Stock(self): #Esta es la Abstracción
         pass
@@ -21,11 +21,10 @@ class Producto_Abstracto(ABC):
     def Incrementar_Stock(self): #Esta es la Abstracción
         pass
 
-#Creamos la clase producto
+#Creamos la clase "Producto"
 class Producto(Producto_Abstracto):
-    def __init__(self, nommbre, precio, cantidad_stock, categoria):
-        super().__init__(nommbre, precio, cantidad_stock)
-        self._nombre=nommbre   #Atributo encapsulado
+    def __init__(self, nombre, precio, cantidad_stock, categoria):
+        self._nombre=nombre   #Atributo encapsulado
         self._precio=precio    #Atributo encapsulado
         self.cantidad_stock=cantidad_stock
         self.categoria=categoria
@@ -45,9 +44,12 @@ class Producto(Producto_Abstracto):
     def Incrementar_Stock(self): #Implementación de la abstracción
         self.cantidad_stock += 1
 
+    def Info_producto(self): #Polimorfismo
+        return f"Nombre:{self._nombre}, Precio: {self.precio}, Cantidad: {self.cantidad_stock}, Categoría: {self.categoria}\n"
+
 
 #Creamos la clase Carrito tal como lo solicita la consigna, con los métodos mencionados
-class Carrito_Compra: 
+class Carrito_Compra(Producto): #Herencia
     def __init__(self):
         self.productos = []
 
@@ -63,26 +65,27 @@ class Carrito_Compra:
         for producto in self.productos:
             total_productos += 1
         return f"El total de productos que tiene el carrito es: {total_productos}"
+    
+    def calcular_importe_total(self):
+        suma=0
+        for producto in self.productos:
+            suma += producto.precio
+        return suma
 
-#Creamos la clase 
-class Cliente:
-    def init(self, nombre, direccion):
+    def info_producto(self): #Polimorfismo
+        producto=super().Info_producto()
+        return f"Usted tiene en el carrito de compras:\n", producto
+    
+    
+#Creamos la clase "Cliente" que tiene un carrito de compras
+class Cliente():
+    def __init__(self, nombre, direccion):
         self.nombre = nombre
         self.direccion = direccion
         self.carrito = Carrito_Compra()
 
     def completar_compra(self):
-        total = self.carrito.calcular_total()
-        print(f"Compra completada por {self.nombre} por un total de ${total}.")
-        self.carrito = Carrito_Compra()
-
-remera= Producto("Remera Azul", 8500 , 500, "Camiseta")
-pantalon =Producto("Jean Negro",20000 , 850, "Pantalones")
-
-carrito = Carrito_Compra()
-carrito.agregar_producto(remera)
-carrito.agregar_producto(pantalon)
-
-
-
+        total_productos = len(self.carrito.productos)
+        return f"Compra completada por {self.nombre} por un total de {total_productos} productos."
+    
     

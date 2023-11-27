@@ -24,23 +24,27 @@ class Punto3D:
 
 class Figura3D(ABC):
 
-    @abstractmethod
+    @abstractmethod    #Parte de la abstracción
     def calcular_volumen(self):
         pass
 
-    @abstractmethod
+    @abstractmethod    #Parte de la abstracción
     def calcular_area_superficial(self):
         pass
 
 
 class Cubo(Figura3D):
     def __init__(self, lado):
-        self.lado = lado
+        self._lado = lado   #Atributo Encapsulado
 
-    def calcular_volumen(self):
+    @property
+    def lado(self):  #Implementación Encapsulamiento
+        return self._lado
+
+    def calcular_volumen(self): #Implementación de la abstracción
         return self.lado ** 3
 
-    def calcular_area_superficial(self):
+    def calcular_area_superficial(self): #Implementación de la abstracción
         return 6 * self.lado ** 2
 
 
@@ -48,10 +52,10 @@ class Esfera(Figura3D):
     def __init__(self, radio):
         self.radio = radio
 
-    def calcular_volumen(self):
+    def calcular_volumen(self):   #Implementación de la abstracción
         return (4 / 3) * math.pi * self.radio ** 3
 
-    def calcular_area_superficial(self):
+    def calcular_area_superficial(self):  #Implementación de la abstracción
         return 4 * math.pi * self.radio ** 2
 
 
@@ -68,18 +72,4 @@ class Cilindro(Figura3D):
         area_lateral = 2 * math.pi * self.radio * self.altura
         return 2 * area_base + area_lateral
 
-#Instanciamos:
-punto = Punto3D(1, 2, 3)
-print ("Las coordenadas del punto son: ", punto.mostrar_coordenadas())
 
-cubo = Cubo(5)
-print ("El vólumen del cubo es: ", cubo.calcular_volumen())
-print ("El área superficial del cubo: ", cubo.calcular_area_superficial())
-
-esfera = Esfera(4)
-print ("El vólumen del cubo es: ", esfera.calcular_volumen())
-print ("El área superficial del cubo: ", esfera.calcular_area_superficial())
-
-cilindro = Cilindro(3, 6)
-print ("El vólumen del cubo es: ", cilindro.calcular_volumen())
-print ("El área superficial del cubo: ", cilindro.calcular_area_superficial())
