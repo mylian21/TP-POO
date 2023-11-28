@@ -1,15 +1,23 @@
 """Hacer un decorador para registrar las llamadas a una función, junto con
 sus argumentos y resultados."""
 
-def registro_llamadas(funtion):
+def registro_llamadas(funcion):
     def wrapper(*args, **kwargs):
-        print(f"La función es:{funtion.__name__}")
-        return funtion(*args,**kwargs)
+        registro.append({
+        "función": funcion.__name__,
+        "argumentos": args,
+        "kwargs": kwargs,    
+        "resultado": funcion(*args, **kwargs)
+        })
+        return funcion(*args,**kwargs)
     return wrapper
 
-@registro_llamadas
-def multiplicar(num1, num2):
-    return num1*num2
+@registro_llamadas #mi decorador
+def sumar(a, b):
+    return a + b
+registro = []
 
-resultado=multiplicar(4,10)
-print(resultado)
+#Le paso parametros a mi función, con distintos tipos de dato, ya sea "int", "float" y "string":
+sumar(21, 14)
+sumar("Hola", " soy mylian")
+print(registro)
