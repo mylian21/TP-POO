@@ -9,18 +9,18 @@ def sumar_digitos(numero):
         return suma_pares
 # Si el resultado es impar, restar 3 y sumarlo.    
     elif numero % 2 == 1:
-        total=(numero - 3)+numero
+        total=(numero-3)+numero
         return total
 # Si el resultado es negativo, sumar 1
     elif numero < 0:
-        total_2=numero +1
-    return total_2
-
+        numneg=numero+1
+        return numneg
+    
 resultado1 = sumar_digitos(2468)
 print(f"Resultado 1: {resultado1}")  #Imprime: 20
 
 resultado2 = sumar_digitos(7)
-print(f"Resultado 2: {resultado2}")  #Imprime: 5
+print(f"Resultado 2: {resultado2}")  #Imprime: 11
 
 resultado3= sumar_digitos(-3)
 print(f"Resultado 3: {resultado3}") 
